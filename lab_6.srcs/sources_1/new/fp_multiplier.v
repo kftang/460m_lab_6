@@ -41,21 +41,21 @@ module fp_multiplier(
     assign f1_exp = f1[6:4];
     assign f2_exp = f2[6:4];
     
-    wire [5:0] line_1;
-    wire [6:0] line_2;
-    wire [7:0] line_3;
-    wire [8:0] line_4;
-    wire [9:0] line_5;
-    assign line_1 = f2_frac[0] ? {f1_frac, 1'b0} : 6'b0;
-    assign line_2 = f2_frac[1] ? {f1_frac, 2'b0} : 7'b0;
-    assign line_3 = f2_frac[2] ? {f1_frac, 3'b0} : 8'b0;
-    assign line_4 = f2_frac[3] ? {f1_frac, 4'b0} : 9'b0;
-    assign line_5 = f2_frac[4] ? {f1_frac, 5'b0} : 10'b0;
+    wire [4:0] line_1;
+    wire [5:0] line_2;
+    wire [6:0] line_3;
+    wire [7:0] line_4;
+    wire [8:0] line_5;
+    assign line_1 = f2_frac[0] ? f1_frac : 5'b0;
+    assign line_2 = f2_frac[1] ? {f1_frac, 1'b0} : 6'b0;
+    assign line_3 = f2_frac[2] ? {f1_frac, 2'b0} : 7'b0;
+    assign line_4 = f2_frac[3] ? {f1_frac, 3'b0} : 8'b0;
+    assign line_5 = f2_frac[4] ? {f1_frac, 4'b0} : 9'b0;
     
     wire [9:0] mult_sum;
     wire [3:0] mult_frac;
     assign mult_sum = line_1 + line_2 + line_3 + line_4 + line_5;
-    assign mult_frac = mult_sum[9:5];
+    assign mult_frac = mult_sum[8:5];
     
     wire [3:0] mult_exp;
     assign mult_exp = f1_exp + f2_exp - 3;
