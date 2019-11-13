@@ -55,15 +55,15 @@ module fp_multiplier(
     wire [9:0] mult_sum;
     wire [3:0] mult_frac;
     assign mult_sum = line_1 + line_2 + line_3 + line_4 + line_5;
-    assign mult_frac = mult_sum[8:4];
+    assign mult_frac = mult_sum[9:5];
     
     wire [3:0] mult_exp;
     assign mult_exp = f1_exp + f2_exp - 3;
     assign overflow = f1_exp > 7;
-    assign underflow = f1_exp + f2_exp < 2;
+    assign underflow = f1_exp + f2_exp < 4;
     
     wire mult_sign;
     assign mult_sign = f1_sign ^ f2_sign;
-    assign fout = {mult_sign, mult_exp, mult_frac};
+    assign fout = {mult_sign, mult_exp[2:0], mult_frac};
     
 endmodule
