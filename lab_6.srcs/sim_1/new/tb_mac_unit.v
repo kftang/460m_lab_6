@@ -20,7 +20,14 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module tb_mac_unit(
+module tb_mac_unit;
 
-    );
+    reg clk;
+    reg en;
+    reg [7:0] f1;
+    reg [7:0] f2;
+    wire [7:0] acc;
+    wire overflow;
+    wire underflow;
+    wire nan
 endmodule

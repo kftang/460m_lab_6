@@ -60,7 +60,11 @@ module tb_matrix_multiplier;
         .done(done)
     );
     
+    always
+        #10 clk = ~clk;
+    
     initial begin
+    clk = 0;
     // A
     // 1.5 2.0 -1.0     = 1.1000, 10.000, -1.0000
     // 1.0 0.5 -0.75    = 1.0000, 0.100, -0.1100
