@@ -166,6 +166,7 @@ module matrix_multiplier(
     );
     
     reg [3:0] counter;
+    assign done = counter > 6;
     
     initial
         counter = 0;

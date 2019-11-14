@@ -70,10 +70,11 @@ module mac_unit(
                 acc = 0;
             else begin
                 if (f1 != 0 && f2 != 0) begin
-                    acc = fout_add;
                     f1_add = acc;
                     f2_add = fout;
+                    acc = fout_add;
                 end
+                // multiply by 0 doesn't change acc
             end
         end
     end
