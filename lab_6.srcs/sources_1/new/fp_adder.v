@@ -16,6 +16,12 @@ module fp_adder(
     
     assign f1_exp = f1[6:4]; // get exponents
     assign f2_exp = f2[6:4];
+    
+    initial begin
+        fout = 0;
+        overflow = 0;
+        underflow = 0;
+    end
         
     always@(*) begin
         if(f1[6:4] == 3'b000) f1_frac = {1'b0,f1[3:0]}; // check for 0 or else create the "fraction"
@@ -64,6 +70,7 @@ module fp_adder(
         end
         if(shf_sum[11]) begin 
             overflow = 1;
+            fout = 0;
         end
         else if(shf_sum[10]) begin 
             fout[6:4] = 6; 

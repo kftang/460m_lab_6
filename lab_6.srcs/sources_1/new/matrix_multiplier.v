@@ -165,7 +165,7 @@ module matrix_multiplier(
         .nan(nans[8])
     );
     
-    reg [3:0] counter;
+    reg [10:0] counter;
     assign done = counter > 6;
     
     initial
@@ -174,96 +174,97 @@ module matrix_multiplier(
     always @(posedge clk) begin
         case (counter)
             0: begin
-                mac1_f1 = a00;
-                mac1_f2 = b00;
+                mac1_f1 <= a00;
+                mac1_f2 <= b00;
                 // mac1
-                mac_ens = 9'b000000001;
+                mac_ens <= 9'b000000001;
             end
             1: begin
-                mac2_f1 = mac1_f1;
-                mac2_f2 = b01;
-                mac4_f1 = a10;
-                mac4_f2 = mac1_f2;
+                mac2_f1 <= mac1_f1;
+                mac2_f2 <= b01;
+                mac4_f1 <= a10;
+                mac4_f2 <= mac1_f2;
                 
-                mac1_f1 = a01;
-                mac1_f2 = b10;
+                mac1_f1 <= a01;
+                mac1_f2 <= b10;
                 // mac1, mac2, mac4
-                mac_ens = 9'b000001011;
+                mac_ens <= 9'b000001011;
             end
             2: begin
-                mac3_f1 = mac2_f1;
-                mac3_f2 = b02;
-                mac5_f1 = mac4_f1;
-                mac5_f2 = mac2_f2;
-                mac7_f1 = a20;
-                mac7_f2 = mac4_f2;
+                mac3_f1 <= mac2_f1;
+                mac3_f2 <= b02;
+                mac5_f1 <= mac4_f1;
+                mac5_f2 <= mac2_f2;
+                mac7_f1 <= a20;
+                mac7_f2 <= mac4_f2;
                 
-                mac1_f1 = a02;
-                mac1_f2 = b20;
-                mac2_f1 = mac1_f1;
-                mac2_f2 = b11;
-                mac4_f1 = a11;
-                mac4_f2 = mac1_f2;
+                mac1_f1 <= a02;
+                mac1_f2 <= b20;
+                mac2_f1 <= mac1_f1;
+                mac2_f2 <= b11;
+                mac4_f1 <= a11;
+                mac4_f2 <= mac1_f2;
                 // mac1, mac2, mac4, mac3, mac5, mac7
-                mac_ens = 9'b001011111;
+                mac_ens <= 9'b001011111;
             end
             3: begin
-                mac6_f1 = mac5_f1;
-                mac6_f2 = mac3_f2;
-                mac8_f1 = mac7_f1;
-                mac8_f2 = mac4_f2;
+                mac6_f1 <= mac5_f1;
+                mac6_f2 <= mac3_f2;
+                mac8_f1 <= mac7_f1;
+                mac8_f2 <= mac5_f2;
                 
-                mac3_f1 = mac2_f1;
-                mac3_f2 = b12;
-                mac5_f1 = mac4_f1;
-                mac5_f2 = mac2_f2;
-                mac7_f1 = a21;
-                mac7_f2 = mac4_f2;
+                mac3_f1 <= mac2_f1;
+                mac3_f2 <= b12;
+                mac5_f1 <= mac4_f1;
+                mac5_f2 <= mac2_f2;
+                mac7_f1 <= a21;
+                mac7_f2 <= mac4_f2;
                 
-                mac2_f1 = mac1_f1;
-                mac2_f2 = b21;
-                mac4_f1 = a12;
-                mac4_f2 = mac1_f2;
+                mac2_f1 <= mac1_f1;
+                mac2_f2 <= b21;
+                mac4_f1 <= a12;
+                mac4_f2 <= mac1_f2;
                 // mac1 (done), mac2, mac4, mac3, mac5, mac7, mac6, mac8
-                mac_ens = 9'b111111110;
+                mac_ens <= 9'b111111111;
             end
             4: begin
-                mac9_f1 = mac8_f1;
-                mac9_f2 = mac6_f2;
+                mac9_f1 <= mac8_f1;
+                mac9_f2 <= mac6_f2;
                 
-                mac6_f1 = mac5_f1;
-                mac6_f2 = mac3_f2;
-                mac8_f1 = mac7_f1;
-                mac8_f2 = mac4_f2;
+                mac6_f1 <= mac5_f1;
+                mac6_f2 <= mac3_f2;
+                mac8_f1 <= mac7_f1;
+                mac8_f2 <= mac5_f2;
                 
-                mac3_f1 = mac2_f1;
-                mac3_f2 = b22;
-                mac5_f1 = mac4_f1;
-                mac5_f2 = mac2_f2;
-                mac7_f1 = a22;
-                mac7_f2 = mac4_f2;
+                mac3_f1 <= mac2_f1;
+                mac3_f2 <= b22;
+                mac5_f1 <= mac4_f1;
+                mac5_f2 <= mac2_f2;
+                mac7_f1 <= a22;
+                mac7_f2 <= mac4_f2;
                 
                 // mac1 (done), mac2 (done), mac4 (done), mac3, mac5, mac7, mac6, mac8, mac9
-                mac_ens = 9'b111110100;
+                mac_ens <= 9'b111111110;
             end
             5: begin
-                mac9_f1 = mac8_f1;
-                mac9_f2 = mac6_f2;
+                mac9_f1 <= mac8_f1;
+                mac9_f2 <= mac6_f2;
                 
-                mac6_f1 = mac5_f1;
-                mac6_f2 = mac3_f2;
-                mac8_f1 = mac7_f1;
-                mac8_f2 = mac4_f2;
+                mac6_f1 <= mac5_f1;
+                mac6_f2 <= mac3_f2;
+                mac8_f1 <= mac7_f1;
+                mac8_f2 <= mac5_f2;
                                 
                 // mac1 (done), mac2 (done), mac4 (done), mac3 (done), mac5 (done), mac7 (done), mac6, mac8, mac9
-                mac_ens = 9'b110100000;
+                mac_ens <= 9'b111110100;
             end
             6: begin
-                mac9_f1 = mac8_f1;
-                mac9_f2 = mac6_f2;
-                mac_ens = 9'b100000000;
+                mac9_f1 <= mac8_f1;
+                mac9_f2 <= mac6_f2;
+                mac_ens <= 9'b110100000;
             end
-            7: mac_ens = 9'b000000000;
+            7: mac_ens <= 9'b100000000;
+            8: mac_ens <= 9'b000000000;
         endcase
         counter = counter + 1;
     end

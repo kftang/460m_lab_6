@@ -61,11 +61,11 @@ module fp_multiplier(
     
     wire [3:0] mult_exp;
     assign mult_exp = mult_sum[9] ? f1_exp + f2_exp - 2 : f1_exp + f2_exp - 3;
-    assign overflow = mult_exp > 6;
-    assign underflow = f1_exp + f2_exp < 4;
+    assign overflow = mult_exp > 6 && (f1 != 0 && f2 != 0);
+    assign underflow = mult_exp == 0 && (f1 != 0 && f2 != 0);
     
     wire mult_sign;
-    assign mult_sign = f1_sign ^ f2_sign;
-    assign fout = overflow || underflow || nan ? 0 : {mult_sign, mult_exp[2:0], mult_frac};
+    assign mult_sign = f1 == 0 || f2 == 0 ? 0 : f1_sign ^ f2_sign;
+    assign fout = overflow || underflow || nan || f1 == 0 || f2 == 0 ? 0 : {mult_sign, mult_exp[2:0], mult_frac};
     
 endmodule
